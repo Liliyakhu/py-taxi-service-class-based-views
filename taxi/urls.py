@@ -1,8 +1,15 @@
+from django.conf.urls.static import static
 from django.urls import path
 
-from .views import (index, ManufacturerListView,
-                    CarListView, CarDetailView,
-                    DriverListView, DriverDetailView)
+from taxi_service import settings
+
+from taxi.views import index
+from taxi.views import ManufacturerListView
+from taxi.views import CarListView
+from taxi.views import CarDetailView
+from taxi.views import DriverListView
+from taxi.views import DriverDetailView
+
 
 urlpatterns = [
     path("", index, name="index"),
@@ -30,6 +37,6 @@ urlpatterns = [
         DriverDetailView.as_view(),
         name="driver-detail"
     ),
-]
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 app_name = "taxi"
